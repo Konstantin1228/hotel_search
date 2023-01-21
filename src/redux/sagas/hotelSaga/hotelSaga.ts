@@ -20,7 +20,7 @@ interface qeuryParam {
 }
 
 const getHotels = ({ location, checkIn, checkOut }: qeuryParam) =>
-    axios.get<hotelTypes[]>(`http://engine.hotellook.com/api/v2/cache.json?location=${location}&currency=rub&checkIn=${checkIn}&checkOut=${checkOut}&limit=20&language=de`)
+    axios.get<hotelTypes[]>(`https://engine.hotellook.com/api/v2/cache.json?location=${location}&currency=rub&checkIn=${checkIn}&checkOut=${checkOut}&limit=20&language=de`)
 
 
 function* fetchHotelSaga({ payload }: { type: string, payload: FetchHotelListRequestPayload }) {
