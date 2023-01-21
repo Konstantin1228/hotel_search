@@ -1,0 +1,231 @@
+@import "../../styles/variables.scss";
+
+
+.home {
+    background-color: $gray;
+    padding: 2rem;
+
+    &__inner {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+
+        .home__left {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+
+            .smallTitle {
+                font-weight: 500;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            input[type="date"] {
+                color: #99A0A3;
+
+                &::-webkit-calendar-picker-indicator {
+                    background: url(../../img/icons/dateicon.svg) no-repeat;
+                }
+            }
+        }
+
+        .wrapper-favorite {
+            max-height: 30rem;
+            min-width:24.3rem ;
+
+            .smallTitle {
+                margin-bottom: 1.5rem;
+                font-size: 1.5rem;
+                min-width: 100%;
+                min-width: 19rem;
+            }
+
+            &-filter {
+                display: flex;
+                gap: 0.5rem;
+                margin-bottom: 2rem;
+
+                button,
+                .active {
+                    display: flex;
+                    align-items: center;
+                    padding: 0.25rem 0.5rem;
+                    border: 1px solid #E5E5E5;
+                    border-radius: 4px;
+                    color: #99A0A3;
+                    transition: all .3s;
+
+                    span {
+                        margin-right: 0.5rem;
+                    }
+
+                    svg path {
+                        fill: #99A0A3;
+                        opacity: 0.5;
+                    }
+
+                    .wrapper-favorite-filter-arrows {
+                        display: flex;
+                        flex-direction: column;
+                    }
+
+                    &:active {
+                        scale: 0.9;
+                    }
+                }
+
+                .active {
+                    border: 1px solid $brown;
+                    color: $brown;
+
+                    &-svg {
+                        path {
+                            opacity: 1 !important;
+                            fill: #41522E !important;
+                        }
+                    }
+                }
+            }
+
+            &-hotels {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                max-height: 18rem;
+                overflow-y: auto;
+                height: 100%;
+                padding-right: 1rem;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+        }
+
+        .home__right {
+            width: 40%;
+            min-height: 60rem;
+
+            &-title {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 1.9rem;
+
+                h1 {
+                    font-size: 2rem;
+                    color: $darkGray;
+                    font-weight: 500;
+
+                }
+
+                .date {
+                    font-size: 1.5rem;
+                    color: $brown;
+                }
+            }
+
+            &-slider {
+                position: relative;
+                margin-bottom: 2rem;
+
+                .improser {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    z-index: 3;
+                    height: 95%;
+                    background: #C4C4C4;
+                    opacity: 0.25;
+                    width: 9.5%;
+                    border-radius: 10px 0 0 10px;
+                }
+
+                img {
+                    // box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.15);
+                    border-radius: 10px;
+                }
+            }
+
+            .offer-title {
+                margin-bottom: 2rem;
+                max-width: none;
+
+                span {
+                    font-weight: 500;
+                    color: $darkGray;
+                }
+            }
+
+            &-offers {
+                display: flex;
+                flex-direction: column;
+                gap: 1.25rem;
+                max-height: 38rem;
+                overflow-y: auto;
+                height: 100%;
+                padding-right: 1.5rem;
+
+                &::-webkit-scrollbar {
+                    width: 0.25rem;
+                }
+
+                &::-webkit-scrollbar-track {
+                    background: #E7E7E7;
+                    border-radius: 2px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    // border-left: 4px white solid;
+                    background: black;
+                    border-radius: 2px;
+                }
+            }
+        }
+    }
+
+
+}
+
+.wrapper {
+    background-color: white;
+    box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.04);
+    border-radius: 16px;
+    padding: 2rem;
+}
+
+.offer-title {
+    max-width: 15rem;
+    font-weight: 300;
+    color: $darkGray;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.activeStar path {
+    fill: #CDBC1E;
+}
+
+.heart {
+    transition: all .3s;
+    // border: 1px solid #C4C4C4;
+
+    path {
+        fill: white;
+        transition: all .3s;
+
+        &:hover {
+            fill: #EBEBEB;
+            border: 1px solid #C4C4C4;
+        }
+    }
+}
+
+.heartActive path {
+    border: none;
+    fill: #E55858;
+    transition: all .3s;
+}

@@ -1,0 +1,62 @@
+@import "./../../styles/variables.scss";
+
+.auth {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+
+    &:before {
+        z-index: 1;
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background: url(../../img/pickupTruck.png) no-repeat;
+        background-position: center center;
+        background-size: cover;
+        opacity: 0.6;
+    }
+
+    &__window {
+        position: relative;
+        z-index: 5;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        background-color: white;
+        border-radius: 16px;
+
+        &-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: $darkGray;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        &-inputParent {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+
+            &:last-of-type {
+                margin-bottom: 2rem;
+            }
+        }
+    }
+}
+
+.error {
+    display: inline-block;
+    color: $red !important;
+    font-weight: 300;
+    word-break: break-all;
+    width: fit-content;
+    max-width: 18rem;
+}
