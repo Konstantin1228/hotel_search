@@ -1,0 +1,44 @@
+@import "./variables.scss";
+
+* {
+    font-family: 'Roboto';
+}
+
+.input,
+.input-Error {
+    border: 1px solid $lightGray;
+    border-radius: 4px;
+    padding: 0.8rem;
+    min-width: 18rem;
+    color: balck;
+}
+
+.input-Error {
+    color: $red;
+}
+
+.button {
+    position: relative;
+    padding: 0.625rem 1rem;
+    background: linear-gradient(104.34deg, #41522E -15.34%, #BE8022 145.95%);
+    border-radius: 4px;
+    font-weight: 500;
+    color: white;
+    transition-property: all .3s ease-in;
+    opacity: 1;
+
+    &:hover {
+        background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), linear-gradient(104.34deg, #41522E -15.34%, #BE8022 145.95%);
+    }
+
+    &:active {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(104.34deg, #41522E -15.34%, #BE8022 145.95%);
+    }
+}
+
+.smallTitle {
+    color: $darkGray;
+    font-weight: 300;
+}
+
+ 

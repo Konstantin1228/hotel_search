@@ -1,0 +1,87 @@
+@import "../../../styles/variables.scss";
+
+.favoriteHotel,
+.hotelOffer {
+    display: flex;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(135, 135, 135, 0.2);
+    justify-content: space-between;
+
+    &-left {
+
+        &-date {
+            margin-bottom: 0.7rem;
+            color: #878787;
+            display: flex;
+            align-items: center;
+
+            span {
+                width: 0.6rem;
+                background-color: #C4C4C4;
+                border: 1px solid #C4C4C4;
+                border-radius: 2px;
+            }
+        }
+
+        .rating {
+            display: flex;
+            gap: 0.2rem;
+        }
+    }
+
+    &-right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-left: -2rem;
+
+        span {
+            white-space: nowrap;
+            font-weight: 400;
+            color: #878787;
+            font-size: 0.75rem;
+
+            span {
+                // word-wrap: ;
+                color: $darkGray;
+                font-size: 1.1rem;
+            }
+
+        }
+    }
+}
+
+.hotelOffer {
+    width: 100%;
+    justify-content: space-between;
+    max-height: 100%;
+
+    .offer-title {
+        margin-bottom: 0.1rem !important;
+    }
+
+    &-left {
+        display: flex;
+        gap: 1.5rem;
+
+        img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background: rgba(65, 82, 46, 0.05);
+            overflow: visible;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        &-date {
+            margin-bottom: 0.3rem;
+        }
+    }
+
+    &-right {
+        margin-left: 0;
+    }
+}
