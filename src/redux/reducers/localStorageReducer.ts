@@ -6,12 +6,15 @@ export interface favoriteHotel {
     arrivalDate: string
     differnceBetweenDates: number
 }
+
 interface AuthState {
     isUserLogged: boolean
     favoriteHotels: favoriteHotel[]
 }
+
 const isLogged = localStorage.getItem("isUserLogged")
 const favoriteHotels = localStorage.getItem("favoriteHotels")
+
 const initialState: AuthState = {
     isUserLogged: isLogged ? JSON.parse(isLogged) : false,
     favoriteHotels: favoriteHotels ? JSON.parse(favoriteHotels) : [],

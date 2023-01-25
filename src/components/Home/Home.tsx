@@ -2,20 +2,21 @@ import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import FavoriteHotel from './Hotel/FavoriteHotel'
 import HotelOffer from './Hotel/HotelOffer'
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import Loader from '../../UI/Loader/Loader';
+import { BottomArrow, TopArrow } from '../../img/icons';
+
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducers';
+import { hotelArray } from '../../redux/types/types';
+import { fetchHotelList } from '../../redux/actions/hotelAction';
+
 import { FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { BottomArrow, TopArrow } from '../../img/icons';
-import { useForm } from 'react-hook-form';
-import { SubmitHandler } from 'react-hook-form/dist/types';
-import { hotelArray } from '../../redux/types/types';
-import Loader from '../../UI/Loader/Loader';
 import "swiper/scss";
 import "swiper/scss/free-mode";
 import "./home.scss"
-import { fetchHotelList } from '../../redux/actions/hotelAction';
+
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 interface Form {
     location: string
@@ -36,13 +37,15 @@ const Home = () => {
         }
     });
 
+    // console.log(watch("checkIn"))
+
     useEffect(() => {
         const currentDate = new Date()
         const days = watch("days")
         const checkOutDate = new Date(currentDate.setDate(currentDate.getDate() + +days)).toLocaleDateString().split(".").reverse().join("-")
         const checkIn = new Date().toLocaleDateString().split(".").reverse().join("-")
         const arrivalDate = new Date(checkIn).toLocaleDateString("ru-RU", { weekday: undefined, year: "numeric", month: "long", day: "numeric" }).replace(/.{2}$/, "")
-
+        // console.log(checkIn, arrivalDate, watch("checkIn"));
         setDateInfo({ arrivalDate: arrivalDate, differnceBetweenDates: watch("days") })
         dispatch(fetchHotelList({ location: watch("location"), checkIn, checkOut: checkOutDate }))
     }, [])
@@ -67,8 +70,8 @@ const Home = () => {
 
     const onSubmit: SubmitHandler<Form> = ({ location, checkIn, days }) => {
         const checkInDate = new Date(checkIn.split(".").reverse().toString())
+        const arrivalDate = checkInDate.toLocaleDateString("ru-RU", { weekday: undefined, year: "numeric", month: "long", day: "numeric" }).replace(/.{2}$/, "")
         const checkOut = new Date(checkInDate.setDate(checkInDate.getDate() + +days)).toLocaleDateString().split(".").reverse().join("-")
-        const arrivalDate = new Date(checkIn).toLocaleDateString("ru-RU", { weekday: undefined, year: "numeric", month: "long", day: "numeric" }).replace(/.{2}$/, "")
         if (changeDate(watch("checkIn"))) {
             setDateInfo({ arrivalDate, differnceBetweenDates: watch("days") })
             dispatch(fetchHotelList({ location, checkIn: checkIn.split(".").reverse().join("-"), checkOut }))
@@ -131,7 +134,8 @@ const Home = () => {
                                     value: 1,
                                     message: "Минимальное количество дней-1"
                                 }
-                            })} defaultValue={1} className={`input${errors.days ? "-Error" : ""}`} type="number" />
+                            })}
+                                className={`input${errors.days ? "-Error" : ""}`} type="number" />
                             {errors.days?.message && <span className="error">{errors.days.message || "Ошибка!"}</span>}
                         </div>
                         <button className='button' type='submit'>Найти</button>
@@ -226,7 +230,7 @@ const Home = () => {
                                     <h1 className='error' style={{ maxWidth: "none" }}>{error}</h1>
                                 </div>
                                 :
-                                < div className='home__right-title'>
+                                <div className='home__right-title'>
                                     <h1>Настройте параметры поиска.</h1>
                                 </div>
                     }
