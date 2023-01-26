@@ -32,18 +32,21 @@ const Home = () => {
     const { register, watch, setError, handleSubmit, setValue, formState: { errors }, clearErrors } = useForm<Form>({
         mode: "onChange", defaultValues: {
             location: "Москва",
-            checkIn: new Date().toLocaleDateString(),
+            checkIn: new Date().toLocaleDateString("ru-RU"),
             days: 1,
         }
     });
-
+    // "en-US"
+    console.log(new Date());
+    console.log(new Date().toLocaleDateString());
+    console.log(new Date().toLocaleDateString("ru-RU"));
     // console.log(watch("checkIn"))
 
     useEffect(() => {
         const currentDate = new Date()
         const days = watch("days")
-        const checkOutDate = new Date(currentDate.setDate(currentDate.getDate() + +days)).toLocaleDateString().split(".").reverse().join("-")
-        const checkIn = new Date().toLocaleDateString().split(".").reverse().join("-")
+        const checkOutDate = new Date(currentDate.setDate(currentDate.getDate() + +days)).toLocaleDateString("ru-RU").split(".").reverse().join("-")
+        const checkIn = new Date().toLocaleDateString("ru-RU").split(".").reverse().join("-")
         const arrivalDate = new Date(checkIn).toLocaleDateString("ru-RU", { weekday: undefined, year: "numeric", month: "long", day: "numeric" }).replace(/.{2}$/, "")
         // console.log(checkIn, arrivalDate, watch("checkIn"));
         setDateInfo({ arrivalDate: arrivalDate, differnceBetweenDates: watch("days") })
@@ -59,8 +62,8 @@ const Home = () => {
             setError("checkIn", { type: "custom", message: "Поле обязательно к заполнению!" })
             return false
         }
-        const pickedDate = new Date(date).toLocaleDateString().split(".").reverse().join("-")
-        const currentDate = new Date().toLocaleDateString().split(".").reverse().join("-")
+        const pickedDate = new Date(date).toLocaleDateString("ru-RU").split(".").reverse().join("-")
+        const currentDate = new Date().toLocaleDateString("ru-RU").split(".").reverse().join("-")
         if (pickedDate < currentDate) setError("checkIn", { type: "custom", message: "Введите корректную дату!" })
         else {
             clearErrors("checkIn")
@@ -71,7 +74,7 @@ const Home = () => {
     const onSubmit: SubmitHandler<Form> = ({ location, checkIn, days }) => {
         const checkInDate = new Date(checkIn.split(".").reverse().toString())
         const arrivalDate = checkInDate.toLocaleDateString("ru-RU", { weekday: undefined, year: "numeric", month: "long", day: "numeric" }).replace(/.{2}$/, "")
-        const checkOut = new Date(checkInDate.setDate(checkInDate.getDate() + +days)).toLocaleDateString().split(".").reverse().join("-")
+        const checkOut = new Date(checkInDate.setDate(checkInDate.getDate() + +days)).toLocaleDateString("ru-RU").split(".").reverse().join("-")
         if (changeDate(watch("checkIn"))) {
             setDateInfo({ arrivalDate, differnceBetweenDates: watch("days") })
             dispatch(fetchHotelList({ location, checkIn: checkIn.split(".").reverse().join("-"), checkOut }))
