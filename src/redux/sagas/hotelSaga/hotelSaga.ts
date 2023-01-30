@@ -31,7 +31,6 @@ function* fetchHotelSaga({ payload }: { type: string, payload: FetchHotelListReq
     } catch (error) {
         if (axios.isAxiosError(error)) {
             if (error.response?.status === 400) yield put(fetchHotelListFail({ error: "Введите корректный адрес!" }))
-
             else yield put(fetchHotelListFail({ error: "Что то пошло не так!" }))
         }
     }

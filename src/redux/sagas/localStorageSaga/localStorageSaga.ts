@@ -2,7 +2,6 @@ import { all, put, takeLatest } from "redux-saga/effects"
 import { setIsUserLoggedSuccess, setIsUserLoggedFailure, setFavoriteHotelsSuccess, setFavoriteHotelsFailure } from "../../actions/localStorageAction"
 import { localStorageTypes } from "../../actionsType/localStorageTypes"
 import { favoriteHotel } from "../../reducers/localStorageReducer"
-import { hotelArray } from "../../types/types"
 
 function* setUserAuthSaga({ payload }: { type: string, payload: boolean }) {
     try {
@@ -21,6 +20,7 @@ function* setFavoriteHotels({ payload }: { type: string, payload: favoriteHotel 
         data.find(el => el.favoriteHotel.hotelName === payload.favoriteHotel.hotelName) ?
             data = data.filter(el => el.favoriteHotel.hotelName !== payload.favoriteHotel.hotelName) :
             data.push(payload)
+        //  console.log(data)
 
         yield localStorage.setItem("favoriteHotels", JSON.stringify(data))
         yield put(setFavoriteHotelsSuccess(data))

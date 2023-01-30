@@ -54,25 +54,24 @@ const Home = () => {
 
     const changeDate = (date: string) => {
         setValue("checkIn", date)
+
         if (date.length === 0) {
             setError("checkIn", { type: "custom", message: "Поле обязательно к заполнению!" })
-            return false
+            return
         }
-        const pickedDate = new Date(date).toLocaleDateString(locale)
-        const currentDate = new Date().toLocaleDateString(locale)
-        if (pickedDate < currentDate) setError("checkIn", { type: "custom", message: "Введите корректную дату!" })
-        else {
-            clearErrors("checkIn")
-            return true
-        }
+
+        clearErrors("checkIn")
+        return true
     }
 
     const onSubmit: SubmitHandler<Form> = ({ location, checkIn, days }) => {
         const checkInDate = new Date(checkIn.split(".").reverse().toString())
-        const arrivalDate = checkInDate.toLocaleDateString(languageLocale, { year: "numeric", month: "long", day: "numeric" }).replace(/.{2}$/, "")
-        const checkOut = new Date(checkInDate.setDate(checkInDate.getDate() + +days)).toLocaleDateString(locale)
+        const arrivalDate = new Date(watch("checkIn")).toLocaleDateString(languageLocale, { year: "numeric", month: "long", day: "numeric" }).replace(/.{2}$/, "")
+
+        const cloneCheckInDate = new Date(checkInDate.getTime());
+        const checkOut = new Date(cloneCheckInDate.setDate(checkInDate.getDate() + +days)).toLocaleDateString(locale)
         if (changeDate(watch("checkIn"))) {
-            setDateInfo({ arrivalDate, differnceBetweenDates: watch("days") })
+            setDateInfo({ arrivalDate, differnceBetweenDates: +watch("days") })
             dispatch(fetchHotelList({ location, checkIn: checkInDate.toLocaleDateString(locale), checkOut }))
         }
     }
@@ -110,7 +109,7 @@ const Home = () => {
                                     message: "Название города от 3 символов!"
                                 },
                                 maxLength: {
-                                    value: 15,
+                                    value: 20,
                                     message: "Название города до 20 символов!"
                                 },
                             })} className={`input${errors.location ? "-Error" : ""}`} type="text" placeholder='Москва' />
@@ -131,7 +130,7 @@ const Home = () => {
                                 required: "Поле обязательно к заполнению!",
                                 min: {
                                     value: 1,
-                                    message: "Минимальное количество дней-1"
+                                    message: "Минимальное количество дней - 1"
                                 }
                             })}
                                 className={`input${errors.days ? "-Error" : ""}`} type="number" />
@@ -230,7 +229,7 @@ const Home = () => {
                                 </div>
                                 :
                                 <div className='home__right-title'>
-                                    <h1>Настройте параметры поиска.</h1>
+                                    <h1>Отели не найдены. Возможно, стоит выбрать более актуальную дату?</h1>
                                 </div>
                     }
                 </div>
